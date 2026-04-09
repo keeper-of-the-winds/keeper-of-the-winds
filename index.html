@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Keeper of the Winds</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Keeper of the Winds — where photography meets storytelling. Travel, science, and quiet moments captured through light.">
+
+  <!-- System-style font stack for an Apple-like feel -->
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-soft: #f9f9fb;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --accent: #0071e3;
+      --accent-soft: rgba(0, 113, 227, 0.12);
+      --text-main: #1d1d1f;
+      --text-muted: #6e6e73;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-16: 64px;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui,
+        "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, #ffffff 0, #f5f5f7 55%, #eaeaef 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4) var(--space-10);
+    }
+
+    /* Header */
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 0%, #ffffff 0, #c2e4ff 45%, #9fc0ff 100%);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      transform: rotate(-18deg);
+    }
+
+    .brand-text-main {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 0.95rem;
+    }
+
+    .brand-text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: var(--text-main);
+      transition: width 160ms ease-out;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      width: 100%;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-10);
+      border-radius: 32px;
+      background: linear-gradient(135deg, #ffffff 0, #f9f9fb 55%, #f1f4ff 100%);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: var(--space-10);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .hero-title-main {
+      font-size: clamp(2.2rem, 3vw + 1.2rem, 3.4rem);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-1);
+    }
+
+    .hero-title-sub {
+      font-size: clamp(1.4rem, 1.5vw + 0.9rem, 1.8rem);
+      letter-spacing: -0.02em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .hero-body {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin-bottom: var(--space-5);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.4rem;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 12px 30px rgba(0, 113, 227, 0.28);
+      border: none;
+      cursor: pointer;
+      transition: transform 160ms ease-out, box-shadow 160ms ease-out,
+                  background 160ms ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 113, 227, 0.35);
+      background: #0666cc;
+    }
+
+    .btn-ghost {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 0.4rem 0.2rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .btn-ghost span {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: var(--space-3);
+    }
+
+    .hero-media {
+      position: relative;
+    }
+
+    .hero-frame {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      background: radial-gradient(circle at 10% 0%, #ffffff 0, #b0d3ff 45%, #2f3c5f 110%);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      isolation: isolate;
+    }
+
+    .hero-photo {
+      mix-blend-mode: screen;
+      opacity: 0.96;
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: 8%;
+      bottom: 8%;
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    /* Stories grid */
+
+    .section-heading {
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-6);
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-5);
+      margin-bottom: var(--space-10);
+    }
+
+    .story-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.09);
+    }
+
+    .story-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .story-title {
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .story-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .story-meta {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+
+    .story-pill {
+      padding: 0.1rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: var(--surface-soft);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    /* About & contact */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    .muted-block {
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      background: var(--surface-soft);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .muted-block strong {
+      color: var(--text-main);
+    }
+
+    .contact-links {
+      margin-top: var(--space-4);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .contact-links a {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: var(--space-8);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-top: var(--space-4);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: var(--space-6);
+      }
+
+      .hero-media {
+        order: -1;
+      }
+
+      .stories-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        padding-inline: var(--space-3);
+      }
+
+      .hero {
+        padding: var(--space-5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <div class="brand-text-main">Keeper of the Winds</div>
+          <div class="brand-text-sub">Photography · Travel · Science</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#stories">Stories</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title-main">
+        <div>
+          <p class="hero-kicker">Keeper of the Winds</p>
+          <h1 id="hero-title-main" class="hero-title-main">Stories Captured</h1>
+          <h2 class="hero-title-sub">Through Light</h2>
+          <p class="hero-body">
+            Where photography meets storytelling. Explore travel adventures, scientific discoveries,
+            and the quiet moments that move us.
+          </p>
+          <div class="hero-actions">
+            <a href="#stories" class="btn-primary">View latest stories</a>
+            <a href="#about" class="btn-ghost"><span>Why “Keeper of the Winds”</span></a>
+          </div>
+          <p class="hero-note">
+            New photo essays and reflections added as the wind – and curiosity – carries us.
+          </p>
+        </div>
+
+        <div class="hero-media" aria-hidden="true">
+          <div class="hero-frame">
+            <!-- Replace this src with your own photo later -->
+            <img
+              src="https://picsum.photos/seed/keeper-of-the-winds/1200/800"
+              alt=""
+              class="hero-photo"
+              width="1200"
+              height="800"
+              loading="lazy"
+            />
+            <div class="hero-badge">
+              <span class="dot"></span>
+              <span>Light over distant horizons</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stories -->
+      <section id="stories" aria-labelledby="stories-heading">
+        <p class="section-heading">Stories</p>
+        <h2 id="stories-heading" class="section-title">
+          Journeys written in light
+        </h2>
+
+        <div class="stories-grid">
+          <article class="story-card">
+            <p class="story-tag">Travel</p>
+            <h3 class="story-title">Wind over empty roads</h3>
+            <p class="story-body">
+              Long highways, small towns, and the way dusk settles on glass and asphalt.
+              A visual diary from the edge of the map.
+            </p>
+            <div class="story-meta">
+              <span class="story-pill">Photo essay</span>
+              <span>12 min read</span>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <p class="story-tag">Science</p>
+            <h3 class="story-title">The color of invisible things</h3>
+            <p class="story-body">
+              From auroras to particle trails, a look at how physics writes its own
+              photographs across the sky.
+            </p>
+            <div class="story-meta">
+              <span class="story-pill">Field notes</span>
+              <span>8 min read</span>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <p class="story-tag">Quiet moments</p>
+            <h3 class="story-title">Rooms that remember light</h3>
+            <p class="story-body">
+              Still interiors, dust in the air, and the gentle way windows keep
+              track of the passing seasons.
+            </p>
+            <div class="story-meta">
+              <span class="story-pill">Journal</span>
+              <span>5 min read</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- About & Contact -->
+      <section id="about" class="about" aria-labelledby="about-heading">
+        <div class="two-column">
+          <div>
+            <p class="section-heading">About</p>
+            <h2 id="about-heading" class="section-title">
+              A notebook for light, wind, and wonder
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 38rem;">
+              Keeper of the Winds is a personal collection of stories where photographs come first
+              and words arrive quietly behind them. It moves between travel, science, and the
+              moments in between — a place to pause, to notice, and to remember how the world looks
+              when you really see it.
+            </p>
+          </div>
+
+          <div class="muted-block">
+            <p>
+              <strong>What to expect:</strong><br>
+              Slow essays, generous images, and a pace closer to weather than a news feed.
+              No pop‑ups, no noise — just stories captured through light.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading" style="margin-top: var(--space-10);">
+        <div class="two-column">
+          <div>
+            <p class="section-heading">Stay in touch</p>
+            <h2 id="contact-heading" class="section-title">
+              Share a story, or just say hello
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 32rem;">
+              Have a question about a photograph, a place, or a story? I’d love to hear from you.
+            </p>
+
+            <div class="contact-links">
+              <!-- Replace these with your real links -->
+              <a href="mailto:you@example.com">you@example.com</a>
+              <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+              <a href="https://instagram.com/your-handle" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </div>
+          </div>
+
+          <div class="muted-block">
+            <p>
+              When the winds change — new essays, photo sets, or notes from the road —
+              they’ll arrive here first. In time, this space can grow into a full archive of
+              travels, experiments, and quiet observations.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Keeper of the Winds. Built with light and curiosity.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
